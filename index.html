@@ -8,7 +8,7 @@
     <style>
         .container {
             display: flex;
-            align-items: flex-start; /* Aligns the name to the top of the image */
+            align-items: flex-start; /* Aligns the name and email to the top of the image */
             justify-content: flex-start;
         }
 
@@ -20,6 +20,11 @@
             text-align: left; /* Aligns everything to the left */
             margin-left: 20px; /* Adds a bit of padding on the left */
         }
+
+        .email {
+            font-size: 0.9em; /* Smaller font size for the email */
+            margin-top: 5px; /* Adds a small margin above the email */
+        }
     </style>
 </head>
 
@@ -28,11 +33,13 @@
 <div class="content">
     <div class="container">
         <img src="Chopra.jpg" style="width:270px;height:250px;" alt="Hersh Chopra">
-        <h1 style="margin: 0;">Hersh Chopra</h1> <!-- Removes any extra margin around the name -->
-        <h1 style="margin: 0;">
-            <strong>Email:</strong> 
-            <a href="mailto:hershdeepchopra2026@u.northwestern.edu">hershdeepchopra2026@u.northwestern.edu</a>
-        </h1>    
+        <div>
+            <h1 style="margin: 0;">Hersh Chopra</h1>
+            <p class="email">
+                <strong>Email:</strong> 
+                <a href="mailto:hershdeepchopra2026@u.northwestern.edu">hershdeepchopra2026@u.northwestern.edu</a>
+            </p>
+        </div>
     </div>
     <p>I'm a fifth year PhD Student at NU. My interest is in Game Theory, Information Economics, Probability, Convex Analysis, and Statistical Decision Theory.</p>
     
@@ -49,4 +56,3 @@
 
 </body>
 </html>
-
