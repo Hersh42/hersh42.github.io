@@ -14,8 +14,9 @@
       --panel: #faf7f7;
       --edge: #e7e3e3;
       --ring: rgba(139,0,0,0.25);
-      --max-ch: 70ch;              /* readable line length */
+      --max-ch: 80ch;              /* readable line length (wider) */
     }
+    body { margin: 0; }
 
     .container {
       display: flex;
@@ -31,8 +32,9 @@
 
     .content {
       text-align: left;
-      margin-left: 20px;
-      padding-bottom: 40px;
+      margin: 0 auto;                 /* center the page */
+      max-width: 1100px;              /* wider page container */
+      padding: 0 28px 48px;           /* side padding + bottom space */
     }
 
     .email {
@@ -123,6 +125,48 @@
       border-bottom: 1px solid currentColor;
     }
     .paper a:hover { border-bottom-color: transparent; }
+
+    /* References list */
+    .references { margin: 8px 0 24px; padding-left: 18px; max-width: var(--max-ch); }
+    .references li { margin: 6px 0; }
+    .references a { text-decoration: none; border-bottom: 1px solid currentColor; }
+  
+    /* References (muted) */
+    .refs-heading { margin: 6px 0 4px; font-size: 1em; color: var(--muted); font-weight: 600; }
+    .references { margin: 2px 0 18px; padding-left: 18px; max-width: var(--max-ch); font-size: 0.95em; color: var(--muted); }
+    .references li { margin: 4px 0; }
+    .references a { text-decoration: none; border-bottom: 1px dotted var(--edge); color: inherit; }
+  
+    /* References dropdown */
+    details.refs {
+      margin: 10px 0 20px;
+      border: 1px solid var(--edge);
+      border-left: 4px solid var(--edge);
+      border-radius: 10px;
+      background: #fff;
+      max-width: var(--max-ch);
+      overflow: hidden;
+    }
+    details.refs > summary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+      list-style: none;
+      color: var(--muted);
+    }
+    details.refs > summary::marker { content: ""; }
+    details.refs > summary::before {
+      content: "▸";
+      display: inline-block;
+      transform-origin: 50% 50%;
+      transition: transform 160ms ease;
+    }
+    details.refs[open] > summary::before { transform: rotate(90deg); }
+    details.refs > .refs-body { padding: 8px 14px 12px; border-top: 1px solid var(--edge); }
   </style>
 </head>
 
@@ -138,7 +182,7 @@
         <a href="mailto:hershdeepchopra2026@u.northwestern.edu">hershdeepchopra2026@u.northwestern.edu</a>
       </p>
       <p class="resume">
-        <a href="cv.pdf" target="_blank"> 
+        <a href="cv.docx" target="_blank"> 
           Resume
         </a>
       </p>
@@ -151,6 +195,28 @@
   <!-- Job Market Line -->
   <p class="job-market"><strong>I am on the job market for the 2025–2026 academic year.</strong></p>
 
+  <!-- References (dropdown) -->
+  <details class="refs">
+    <summary>References</summary>
+    <div class="refs-body">
+      <ul class="references">
+        <li>
+          <strong>Professor Jeffrey Ely</strong>, Northwestern University<br>
+          <a href="mailto:jeffely@northwestern.edu">jeffely@northwestern.edu</a>
+        </li>
+        <li>
+          <strong>Professor Bruno Strulovici</strong>, Northwestern University<br>
+          <a href="mailto:b-strulovici@northwestern.edu">b-strulovici@northwestern.edu</a>
+        </li>
+        <li>
+          <strong>Professor Alessandro Pavan</strong>, Northwestern University<br>
+          <a href="mailto:alepavan@northwestern.edu">alepavan@northwestern.edu</a>
+        </li>
+      </ul>
+    </div>
+  </details>
+
+
   <h2>Job Market Papers</h2>
   <p class="paper">
     <a href="JMP.pdf" target="_blank">
@@ -162,20 +228,20 @@
     <summary>Abstract <span class="meta">Click to expand</span></summary>
     <div>
       This paper develops a theory of employer competition over hiring standards in labor mar-
-kets where employers rely on third-party certification to screen applicants. The certifier sells
-tests to an applicant, who possesses noisy private information about his ability and seeks to
-persuade employers to offer him employment. An employer hires if conditional on the test
-outcome her posterior belief about the applicant’s ability meets her standard. Employers com-
-pete in their selectivity or hiring standards to attract the applicant. The certifier faces both a
-screening problem, due to applicants’ private information, and an information design prob-
-lem, as tests must be informative enough to persuade employers. The screening frictions faced
-by the certifier affect the equilibrium determination of hiring standards and the certification
-mechanism. I show that this inefficiency in test allocation leads to two distortions relative to a
-benchmark where the certifier only faces an information design problem. First, there is an in-
-crease in the probability of unemployment. The certifier’s optimal selling mechanism leads to
-the exclusion of some applicant types. Second, competition among employers intensifies. The
-inefficient test allocation steers the applicant supply towards less selective employers, resulting
-in equilibrium constriction of standards.
+ kets where employers rely on third-party certification to screen applicants. The certifier sells
+ tests to an applicant, who possesses noisy private information about his ability and seeks to
+ persuade employers to offer him employment. An employer hires if conditional on the test
+ outcome her posterior belief about the applicant’s ability meets her standard. Employers com-
+ pete in their selectivity or hiring standards to attract the applicant. The certifier faces both a
+ screening problem, due to applicants’ private information, and an information design prob-
+ lem, as tests must be informative enough to persuade employers. The screening frictions faced
+ by the certifier affect the equilibrium determination of hiring standards and the certification
+ mechanism. I show that this inefficiency in test allocation leads to two distortions relative to a
+ benchmark where the certifier only faces an information design problem. First, there is an in-
+ crease in the probability of unemployment. The certifier’s optimal selling mechanism leads to
+ the exclusion of some applicant types. Second, competition among employers intensifies. The
+ inefficient test allocation steers the applicant supply towards less selective employers, resulting
+ in equilibrium constriction of standards.
     </div>
   </details>
 
@@ -204,4 +270,3 @@ in equilibrium constriction of standards.
 
 </body>
 </html>
-
