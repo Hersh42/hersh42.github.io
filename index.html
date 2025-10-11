@@ -36,6 +36,33 @@
                 color: darkred; /* or use #8B0000 */
         }
     </style>
+    <style>
+  /* put with your other styles */
+  details.abstract {
+    margin: 8px 0 20px;
+    max-width: 60ch; /* optional: keeps lines readable */
+  }
+  details.abstract > summary {
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: underline;
+    list-style: none; /* remove default marker in some browsers */
+  }
+  /* optional: custom caret */
+  details.abstract > summary::marker { content: ""; }
+  details.abstract > summary::before {
+    content: "▸";
+    display: inline-block;
+    width: 1em;
+    transition: transform 0.2s ease;
+  }
+  details.abstract[open] > summary::before { transform: rotate(90deg); }
+  details.abstract > div {
+    margin-top: 8px;
+    line-height: 1.45;
+  }
+</style>
+
 </head>
 
 <body>
@@ -72,14 +99,19 @@
     <h2>Working Papers</h2>
     <p>
         <a href="Certifying_Lemons.pdf" target="_blank">
-            Certifying Lemons
+            Certifying Lemons with Discernible Hard Information (Email me for a draft)
         </a>
         ; 
         <a href="certlemslides.pdf" target="_blank">
-            Slides
+            Slides for an older version
         </a>
     </p>
-
+        <details class="abstract">
+  <summary>Abstract</summary>
+  <div>
+    A sender with private information (high or low ability) tries to convince a receiver of having higher ability. A certifier offers a menu of (Blackwell) experiments and prices to screen the sender. An experiment produces information conditional on the underlying ability of the sender. The sender uses the experiment’s outcome to persuade the receiver to take a favorable action. This paper focuses on the equilibrium interaction in this game when the receiver can distinguish between outcomes of the experiment based on the hard information contained in the outcome. With binary ability, for a given experiment, the hard information of an outcome is the likelihood ratio of that outcome. I prove a decomposition result that characterizes all possible equilibrium outcomes in terms of a convex combination of menus containing only simple experiments. A simple experiment is an experiment whose outcomes are supported on a set of cardinality at most three. I use this decomposition to show the existence of an equilibrium in which soft information overrules hard information; due to equilibrium self-selection of the sender, some outcomes whose hard information is not sufficient to persuade the receiver end up persuading the receiver.
+  </div>
+</details>
     <br>
 </div>
 
