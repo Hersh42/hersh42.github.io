@@ -2,138 +2,215 @@
 <html>
 
 <head>
-    <title>Hersh</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="style.css" />
-    </style>
-    <style>
-        .container {
-            display: flex;
-            align-items: flex-start; /* Aligns the name and email to the top of the image */
-            justify-content: flex-start;
-        }
+  <title>Hersh</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root{
+      --accent:#8B0000;          /* dark red to match your job-market line */
+      --text:#111;
+      --muted:#666;
+      --bg:#faf7f7;              /* subtle panel background for abstracts */
+      --ring:rgba(139,0,0,0.25); /* focus ring */
+      --maxw: 840px;
+    }
 
-        .container img {
-            margin-right: 20px;
-        }
+    html, body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.55;
+    }
 
-        .content {
-            text-align: left; /* Aligns everything to the left */
-            margin-left: 20px; /* Adds a bit of padding on the left */
-        }
+    .content {
+      text-align: left;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+      max-width: var(--maxw);
+    }
 
-        .email {
-            font-size: 0.9em; /* Smaller font size for the email */
-            margin-top: 5px; /* Adds a small margin above the email */
-        }
+    .container {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 20px;
+    }
 
-        .about-me {
-            margin-top: 20px; /* Adds space between the image and the about me section */
-        }
+    .container img {
+      margin-right: 0;
+      border-radius: 8px;
+      object-fit: cover;
+    }
 
-        .job-market {
-            margin-top: 8px;
-                color: darkred; /* or use #8B0000 */
-        }
-    </style>
-    <style>
-  /* put with your other styles */
-  details.abstract {
-    margin: 8px 0 20px;
-    max-width: 60ch; /* optional: keeps lines readable */
-  }
-  details.abstract > summary {
-    cursor: pointer;
-    font-weight: 600;
-    text-decoration: underline;
-    list-style: none; /* remove default marker in some browsers */
-  }
-  /* optional: custom caret */
-  details.abstract > summary::marker { content: ""; }
-  details.abstract > summary::before {
-    content: "▸";
-    display: inline-block;
-    width: 1em;
-    transition: transform 0.2s ease;
-  }
-  details.abstract[open] > summary::before { transform: rotate(90deg); }
-  details.abstract > div {
-    margin-top: 8px;
-    line-height: 1.45;
-  }
-</style>
+    h1, h2 {
+      margin: 28px 0 12px;
+      line-height: 1.2;
+    }
 
+    .email {
+      font-size: 0.95em;
+      margin-top: 6px;
+    }
+
+    .about-me {
+      margin-top: 20px;
+      max-width: 75ch;
+    }
+
+    .job-market {
+      margin-top: 10px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Paper block (title + links + abstract) */
+    .paper {
+      margin: 14px 0 22px;
+      max-width: 75ch;
+    }
+
+    .paper a {
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+    }
+    .paper a:hover { border-bottom-color: transparent; }
+
+    /* Professional abstract panel using details/summary */
+    details.abstract {
+      margin: 10px 0 0;
+      border: 1px solid #e7e3e3;
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      background: var(--bg);
+      overflow: hidden;
+    }
+
+    details.abstract > summary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+      list-style: none;         /* normalize */
+    }
+
+    /* remove default marker & add custom caret */
+    details.abstract > summary::marker { content: ""; }
+    details.abstract > summary::before {
+      content: "▸";
+      display: inline-block;
+      transform-origin: 50% 50%;
+      transition: transform 160ms ease;
+    }
+    details.abstract[open] > summary::before {
+      transform: rotate(90deg);
+    }
+
+    /* focus state for accessibility */
+    details.abstract > summary:focus {
+      outline: none;
+      box-shadow: 0 0 0 4px var(--ring) inset;
+    }
+
+    details.abstract > div {
+      padding: 12px 14px 14px;
+      border-top: 1px solid #e7e3e3;
+      color: var(--text);
+    }
+
+    .abstract-meta {
+      font-size: 0.92em;
+      color: var(--muted);
+      margin-left: auto;       /* push metadata to the right in the summary row */
+    }
+
+    /* Optional small refinements */
+    .tag {
+      display: inline-block;
+      font-size: 0.8em;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #efe8e8;
+      color: var(--accent);
+      font-weight: 600;
+      margin-left: 6px;
+    }
+
+    @media (max-width: 640px){
+      .container { flex-direction: column; }
+      .about-me, .paper { max-width: 100%; }
+    }
+  </style>
 </head>
 
 <body>
 
 <div class="content">
-    <div class="container">
-        <img src="Chopra.jpg" style="width:270px;height:250px;" alt="Hersh Chopra">
-        <div>
-            <h1 style="margin: 0;">Hersh Chopra</h1>
-            <p class="email">
-                <strong>Email:</strong> 
-                <a href="mailto:hershdeepchopra2026@u.northwestern.edu">hershdeepchopra2026@u.northwestern.edu</a>
-            </p>
-            <p class="resume">
-                <a href="cv.docx" target="_blank"> 
-                    Resume
-                </a>
-            </p>
-        </div>
+  <div class="container">
+    <img src="Chopra.jpg" style="width:270px;height:250px;" alt="Hersh Chopra">
+    <div>
+      <h1 style="margin: 0;">Hersh Chopra</h1>
+      <p class="email">
+        <strong>Email:</strong>
+        <a href="mailto:hershdeepchopra2026@u.northwestern.edu">hershdeepchopra2026@u.northwestern.edu</a>
+      </p>
+      <p class="resume">
+        <a href="cv.docx" target="_blank">Resume</a>
+      </p>
     </div>
-
-    <!-- "About Me" Section Below the Image -->
-    <p class="about-me"><strong>About me:</strong> I'm a sixth-year PhD Student at Northwestern University, expected to graduate in June 2026. My research interests involve <strong>Game Theory, Information Economics, and Statistical Decision Theory</strong>. I enjoy reading about Math, Chemistry, Bio Mechanics, Geopolitics, and Philosophy. My hobbies are hiking, cooking, and weightlifting (the sport).</p>
-
-    <!-- Job Market Line -->
-    <p class="job-market"><strong>I am on the job market for the 2025–2026 academic year.</strong></p>
-    <h2>Job Market Papers</h2>
-     <p>
-        <a href="JMP.pdf" target="_blank">
-           Employer Competition and Certification
-        </a>
-    </p>
-         <details class="abstract">
-  <summary>Abstract</summary>
-  <div>
-    This paper develops a theory of employer competition over hiring standards in labor mar-
-kets where employers rely on third-party certification to screen applicants. The certifier sells
-tests to an applicant, who possesses noisy private information about his ability and seeks to
-persuade employers to offer him employment. An employer hires if conditional on the test
-outcome her posterior belief about the applicant’s ability meets her standard. Employers com-
-pete in their selectivity or hiring standards to attract the applicant. The certifier faces both a
-screening problem, due to applicants’ private information, and an information design prob-
-lem, as tests must be informative enough to persuade employers. The screening frictions faced
-by the certifier affect the equilibrium determination of hiring standards and the certification
-mechanism. I show that this inefficiency in test allocation leads to two distortions relative to a
-benchmark where the certifier only faces an information design problem. First, there is an in-
-crease in the probability of unemployment. The certifier’s optimal selling mechanism leads to
-the exclusion of some applicant types. Second, competition among employers intensifies. The
-inefficient test allocation steers the applicant supply towards less selective employers, resulting
-in equilibrium constriction of standards.
-</details>
-    <br>
-</div>
-    
-    <h2>Working Papers</h2>
-    <p>
-       
-            Certifying Lemons with Discernible Hard Information (Email me for a draft)
-       
-        ; 
-        <a href="certlemslides.pdf" target="_blank">
-            Slides for an older version
-        </a>
-    </p>
-        <details class="abstract">
-  <summary>Abstract</summary>
-  <div>
-    A sender with private information (high or low ability) tries to convince a receiver of having higher ability. A certifier offers a menu of (Blackwell) experiments and prices to screen the sender. An experiment produces information conditional on the underlying ability of the sender. The sender uses the experiment’s outcome to persuade the receiver to take a favorable action. This paper focuses on the equilibrium interaction in this game when the receiver can distinguish between outcomes of the experiment based on the hard information contained in the outcome. With binary ability, for a given experiment, the hard information of an outcome is the likelihood ratio of that outcome. I prove a decomposition result that characterizes all possible equilibrium outcomes in terms of a convex combination of menus containing only simple experiments. A simple experiment is an experiment whose outcomes are supported on a set of cardinality at most three. I use this decomposition to show the existence of an equilibrium in which soft information overrules hard information; due to equilibrium self-selection of the sender, some outcomes whose hard information is not sufficient to persuade the receiver end up persuading the receiver.
   </div>
-</details>
-    <br>
+
+  <p class="about-me"><strong>About me:</strong> I'm a sixth-year PhD Student at Northwestern University, expected to graduate in June 2026. My research interests involve <strong>Game Theory, Information Economics, and Statistical Decision Theory</strong>. I enjoy reading about Math, Chemistry, Bio Mechanics, Geopolitics, and Philosophy. My hobbies are hiking, cooking, and weightlifting (the sport).</p>
+
+  <p class="job-market"><strong>I am on the job market for the 2025–2026 academic year.</strong></p>
+
+  <h2>Job Market Papers</h2>
+
+  <!-- Paper 1 -->
+  <div class="paper">
+    <p>
+      <a href="JMP.pdf" target="_blank"><strong>Employer Competition and Certification</strong></a>
+    </p>
+
+    <details class="abstract">
+      <summary>
+        Abstract
+        <span class="tag">JMP</span>
+        <span class="abstract-meta">Click to expand</span>
+      </summary>
+      <div>
+        This paper develops a theory of employer competition over hiring standards in labor markets where employers rely on third-party certification to screen applicants. The certifier sells tests to an applicant, who possesses noisy private information about his ability and seeks to persuade employers to offer him employment. An employer hires if, conditional on the test outcome, her posterior belief about the applicant’s ability meets her standard.
+        <br><br>
+        Employers compete in their selectivity or hiring standards to attract the applicant. The certifier faces both a screening problem (due to applicants’ private information) and an information-design problem (tests must be informative enough to persuade employers). These screening frictions affect the equilibrium determination of hiring standards and the certification mechanism.
+        <br><br>
+        Relative to a benchmark with only information design, I show two distortions. First, unemployment rises: the certifier’s optimal selling mechanism excludes some applicant types. Second, competition among employers intensifies: inefficient test allocation steers applicants toward less selective employers, leading to an equilibrium constriction of standards.
+      </div>
+    </details>
+  </div>
+
+  <h2>Working Papers</h2>
+
+  <!-- Paper 2 -->
+  <div class="paper">
+    <p>
+      <strong>Certifying Lemons with Discernible Hard Information</strong> (Email me for a draft);
+      <a href="certlemslides.pdf" target="_blank">Slides for an older version</a>
+    </p>
+
+    <details class="abstract">
+      <summary>
+        Abstract
+        <span class="abstract-meta">Click to expand</span>
+      </summary>
+      <div>
+        A sender with private information (high or low ability) tries to convince a receiver of having higher ability. A certifier offers a menu of Blackwell experiments and prices to screen the sender. An experiment produces information conditional on the sender’s ability, and the sender uses the outcome to persuade the receiver to take a favorable action.
+        <br><br>
+        I characterize equilibrium interactions when the receiver can distinguish outcomes via their hard information (likelihood ratios). I prove a decomposition result: every equilibrium outcome is a convex combination of menus containing only simple experiments (outcomes supported on sets of size at most three). Using this, I show the existence of an equilibrium in which soft information overrules hard information—due to equilibrium self-selection, some outcomes whose hard information is not sufficient to persuade the receiver nonetheless end up persuading the receiver.
+      </div>
+    </details>
+  </div>
+
 </div>
 
 </body>
