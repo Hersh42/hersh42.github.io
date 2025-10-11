@@ -6,17 +6,16 @@
   <meta charset="utf-8" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* ====== Base + Layout ====== */
     :root{
-      --accent: #8B0000;           /* matches your job-market color */
+      --accent: #8B0000;
       --text: #111;
       --muted: #666;
-      --panel: #faf7f7;
-      --edge: #e7e3e3;
-      --ring: rgba(139,0,0,0.25);
-      --max-ch: 80ch;              /* readable line length (wider) */
+      --panel: #fafafa;
+      --edge: #e0e0e0;
+      --ring: rgba(139,0,0,0.2);
+      --max-ch: 80ch;
     }
-    body { margin: 0; }
+    body { margin: 0; font-family: system-ui, sans-serif; }
 
     .container {
       display: flex;
@@ -26,15 +25,15 @@
 
     .container img {
       margin-right: 20px;
-      border-radius: 8px;          /* subtle polish */
+      border-radius: 8px;
       object-fit: cover;
     }
 
     .content {
       text-align: left;
-      margin: 0 auto;                 /* center the page */
-      max-width: 1100px;              /* wider page container */
-      padding: 0 28px 48px;           /* side padding + bottom space */
+      margin: 0 auto;
+      max-width: 1100px;
+      padding: 0 28px 48px;
     }
 
     .email {
@@ -49,129 +48,97 @@
 
     .job-market {
       margin-top: 8px;
-      color: darkred; /* or use #8B0000 */
+      color: var(--accent);
       font-weight: 700;
     }
 
-    /* ====== Abstract styling (details/summary) ====== */
+    /* Abstract boxes — more indented and subtle */
     details.abstract {
-      margin: 12px 0 20px;
-      border: 1px solid var(--edge);
-      border-left: 4px solid var(--accent);
-      border-radius: 10px;
-      background: var(--panel);
+      margin: 8px 0 20px 24px; /* indented */
+      border-left: 2px solid var(--edge);
+      background: transparent;
+      padding-left: 12px;
       max-width: var(--max-ch);
-      overflow: hidden;
     }
 
     details.abstract > summary {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
       cursor: pointer;
       font-weight: 600;
-      user-select: none;
-      list-style: none; /* normalize */
+      color: var(--muted);
+      list-style: none;
     }
 
-    /* remove default marker & add custom caret */
     details.abstract > summary::marker { content: ""; }
     details.abstract > summary::before {
       content: "▸";
       display: inline-block;
-      transform-origin: 50% 50%;
+      width: 1em;
+      color: var(--muted);
       transition: transform 160ms ease;
     }
-    details.abstract[open] > summary::before {
-      transform: rotate(90deg);
-    }
-
-    /* focus ring for accessibility */
-    details.abstract > summary:focus {
-      outline: none;
-      box-shadow: 0 0 0 4px var(--ring) inset;
-    }
+    details.abstract[open] > summary::before { transform: rotate(90deg); }
 
     details.abstract > div {
-      padding: 12px 14px 14px;
-      border-top: 1px solid var(--edge);
+      margin-top: 6px;
+      padding-left: 16px;
       line-height: 1.6;
       color: var(--text);
-      animation: fadeIn 180ms ease;
+      font-size: 0.96em;
+      border-left: 1px dashed var(--edge);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-2px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Optional: refine the Abstract label without changing content text */
     details.abstract > summary span.meta {
-      margin-left: auto;
+      margin-left: 8px;
       color: var(--muted);
       font-weight: 500;
-      font-size: 0.92em;
+      font-size: 0.9em;
     }
 
-    /* Keep paper blocks tidy */
-    .paper {
-      margin: 14px 0 22px;
-      max-width: var(--max-ch);
-    }
+    .paper { margin: 14px 0 22px; max-width: var(--max-ch); }
 
-    .paper a {
-      text-decoration: none;
-      border-bottom: 1px solid currentColor;
-    }
-    .paper a:hover { border-bottom-color: transparent; }
+    .paper a { text-decoration: none; border-bottom: none; }
 
-    /* References list */
-    .references { margin: 8px 0 24px; padding-left: 18px; max-width: var(--max-ch); }
-    .references li { margin: 6px 0; }
-    .references a { text-decoration: none; border-bottom: 1px solid currentColor; }
-  
-    /* References (muted) */
-    .refs-heading { margin: 6px 0 4px; font-size: 1em; color: var(--muted); font-weight: 600; }
-    .references { margin: 2px 0 18px; padding-left: 18px; max-width: var(--max-ch); font-size: 0.95em; color: var(--muted); }
-    .references li { margin: 4px 0; }
-    .references a { text-decoration: none; border-bottom: 1px dotted var(--edge); color: inherit; }
-  
+    
+
+    .paper a:hover { border-bottom: none; }
+
+    
+
     /* References dropdown */
     details.refs {
       margin: 10px 0 20px;
-      border: 1px solid var(--edge);
-      border-left: 4px solid var(--edge);
-      border-radius: 10px;
-      background: #fff;
+      border-left: 2px solid var(--edge);
+      padding-left: 10px;
+      background: transparent;
       max-width: var(--max-ch);
-      overflow: hidden;
     }
+
     details.refs > summary {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
       cursor: pointer;
-      font-weight: 600;
-      user-select: none;
-      list-style: none;
       color: var(--muted);
+      font-weight: 600;
+      list-style: none;
     }
-    details.refs > summary::marker { content: ""; }
+
     details.refs > summary::before {
       content: "▸";
       display: inline-block;
-      transform-origin: 50% 50%;
+      width: 1em;
+      color: var(--muted);
       transition: transform 160ms ease;
     }
+
     details.refs[open] > summary::before { transform: rotate(90deg); }
-    details.refs > .refs-body { padding: 8px 14px 12px; border-top: 1px solid var(--edge); }
+
+    .refs-body { margin-top: 6px; padding-left: 16px; color: var(--muted); font-size: 0.95em; }
+
+    .references { list-style: none; padding-left: 0; }
+    .references li { margin: 4px 0; }
+    .references a { text-decoration: none; border-bottom: 1px dotted var(--edge); color: inherit; }
   </style>
 </head>
 
 <body>
-
 <div class="content">
   <div class="container">
     <img src="Chopra.jpg" style="width:270px;height:250px;" alt="Hersh Chopra">
@@ -182,132 +149,95 @@
         <a href="mailto:hershdeepchopra2026@u.northwestern.edu">hershdeepchopra2026@u.northwestern.edu</a>
       </p>
       <p class="resume">
-        <a href="cv.pdf" target="_blank"> 
-          Resume
-        </a>
+        <a href="cv.pdf" target="_blank">Resume</a>
       </p>
     </div>
   </div>
 
-  <!-- "About Me" Section Below the Image -->
-  <p class="about-me"><strong>About me:</strong> I'm a sixth-year PhD Student at Northwestern University, expected to graduate in June 2026. My research interests involve <strong>Game Theory, Information Economics, and Statistical Decision Theory</strong>. I enjoy reading about Math, Chemistry, Bio Mechanics, Geopolitics, and Philosophy. My hobbies are hiking, cooking, and weightlifting (the sport).</p>
+  <p class="about-me"><strong>About me:</strong> I'm a sixth-year PhD Student at Northwestern University, expected to graduate in June 2026. My research interests involve <strong>Game Theory, Information Economics, and Statistical Decision Theory</strong>.</p>
 
-  <!-- Job Market Line -->
+  <p class="about-me">I enjoy reading about Math, Chemistry, Bio Mechanics, Geopolitics, and Philosophy. My hobbies are hiking, cooking, and weightlifting (the sport).</p>
+
   <p class="job-market"><strong>I am on the job market for the 2025–2026 academic year.</strong></p>
 
-  <!-- References (dropdown) -->
   <details class="refs">
     <summary>References</summary>
     <div class="refs-body">
       <ul class="references">
-        <li>
-          <strong>Professor Jeffrey Ely</strong>, Northwestern University<br>
-          <a href="mailto:jeffely@northwestern.edu">jeffely@northwestern.edu</a>
-        </li>
-        <li>
-          <strong>Professor Bruno Strulovici</strong>, Northwestern University<br>
-          <a href="mailto:b-strulovici@northwestern.edu">b-strulovici@northwestern.edu</a>
-        </li>
-        <li>
-          <strong>Professor Alessandro Pavan</strong>, Northwestern University<br>
-          <a href="mailto:alepavan@northwestern.edu">alepavan@northwestern.edu</a>
-        </li>
+        <li><strong>Professor Jeffrey Ely</strong>, Northwestern University<br><a href="mailto:jeffely@northwestern.edu">jeffely@northwestern.edu</a></li>
+        <li><strong>Professor Bruno Strulovici</strong>, Northwestern University<br><a href="mailto:b-strulovici@northwestern.edu">b-strulovici@northwestern.edu</a></li>
+        <li><strong>Professor Alessandro Pavan</strong>, Northwestern University<br><a href="mailto:alepavan@northwestern.edu">alepavan@northwestern.edu</a></li>
       </ul>
     </div>
   </details>
 
-
   <h2>Job Market Papers</h2>
-  <p class="paper">
-    <a href="JMP.pdf" target="_blank">
-      Employer Competition and Certification
-    </a>
-  </p>
+  <p class="paper"><a href="JMP.pdf" target="_blank">Employer Competition and Certification</a></p>
 
   <details class="abstract">
-    <summary>Abstract <span class="meta">Click to expand</span></summary>
+    <summary>Abstract </summary>
     <div>
       This paper develops a theory of employer competition over hiring standards in labor mar-
- kets where employers rely on third-party certification to screen applicants. The certifier sells
- tests to an applicant, who possesses noisy private information about his ability and seeks to
- persuade employers to offer him employment. An employer hires if conditional on the test
- outcome her posterior belief about the applicant’s ability meets her standard. Employers com-
- pete in their selectivity or hiring standards to attract the applicant. The certifier faces both a
- screening problem, due to applicants’ private information, and an information design prob-
- lem, as tests must be informative enough to persuade employers. The screening frictions faced
- by the certifier affect the equilibrium determination of hiring standards and the certification
- mechanism. I show that this inefficiency in test allocation leads to two distortions relative to a
- benchmark where the certifier only faces an information design problem. First, there is an in-
- crease in the probability of unemployment. The certifier’s optimal selling mechanism leads to
- the exclusion of some applicant types. Second, competition among employers intensifies. The
- inefficient test allocation steers the applicant supply towards less selective employers, resulting
- in equilibrium constriction of standards.
+      kets where employers rely on third-party certification to screen applicants. The certifier sells
+      tests to an applicant, who possesses noisy private information about his ability and seeks to
+      persuade employers to offer him employment. An employer hires if conditional on the test
+      outcome her posterior belief about the applicant’s ability meets her standard. Employers com-
+      pete in their selectivity or hiring standards to attract the applicant. The certifier faces both a
+      screening problem, due to applicants’ private information, and an information design prob-
+      lem, as tests must be informative enough to persuade employers. The screening frictions faced
+      by the certifier affect the equilibrium determination of hiring standards and the certification
+      mechanism. I show that this inefficiency in test allocation leads to two distortions relative to a
+      benchmark where the certifier only faces an information design problem. First, there is an in-
+      crease in the probability of unemployment. The certifier’s optimal selling mechanism leads to
+      the exclusion of some applicant types. Second, competition among employers intensifies. The
+      inefficient test allocation steers the applicant supply towards less selective employers, resulting
+      in equilibrium constriction of standards.
     </div>
   </details>
 
   <h2>Working Papers</h2>
-
- <p class="paper">
-    <a>
-      Incentive-Compatible Information Design (joint with Jeffrey C. Ely)
-    </a>
-  </p>
-
+  <p class="paper"><a>Incentive-Compatible Information Design (joint with Jeffrey C. Ely)</a></p>
   <details class="abstract">
-    <summary>Abstract <span class="meta">Click to expand</span></summary>
+    <summary>Abstract </summary>
     <div>
-     We study the design of mechanisms by an intermediary that generates in-
-formation for a sender to persuade a receiver about an unknown attribute
-of the sender. The sender is initially privately, but imperfectly, informed
-about her attribute, and the receiver takes an action based on posterior beliefs
-about the sender’s attribute and the sender’s belief about the attribute. The
-design of the mechanism, therefore, confronts both incentive-compatibility
-constraints (for the sender) and obedience constraints (for the receiver). We
-characterize profit-maximizing mechanisms when the intermediary contracts
-with the sender, and we specialize to two applications: the design of college-
-admissions tests and the optimal use of consumer data on a digital market
-platform. We also show how our analysis extends beyond a profit-maximizing
-intermediary by analyzing the design of budget-balanced selling mechanisms
-in a lemons market.
-      <\div>
+      We study the design of mechanisms by an intermediary that generates in-
+      formation for a sender to persuade a receiver about an unknown attribute
+      of the sender. The sender is initially privately, but imperfectly, informed
+      about her attribute, and the receiver takes an action based on posterior beliefs
+      about the sender’s attribute and the sender’s belief about the attribute. The
+      design of the mechanism, therefore, confronts both incentive-compatibility
+      constraints (for the sender) and obedience constraints (for the receiver). We
+      characterize profit-maximizing mechanisms when the intermediary contracts
+      with the sender, and we specialize to two applications: the design of college-
+      admissions tests and the optimal use of consumer data on a digital market
+      platform. We also show how our analysis extends beyond a profit-maximizing
+      intermediary by analyzing the design of budget-balanced selling mechanisms
+      in a lemons market.
+    </div>
   </details>
 
-        <p class="paper">
-    <a>
-      Interim Information Design (joint with Jeffrey C. Ely)
-    </a>
-  </p>
-
+  <p class="paper"><a>Interim Information Design (joint with Jeffrey C. Ely)</a></p>
   <details class="abstract">
-    <summary>Abstract <span class="meta">Click to expand</span></summary>
+    <summary>Abstract </summary>
     <div>
-     We study efficient and consumer-surplus maximizing information poli-
-cies in a bilateral trade setting where the buyer is initially privately imper-
-fectly informed about his willingness to pay. We show that providing more
-information to the buyer can lead to higher market prices without affecting
-the consumer or producer surplus.
-      <\div>
+      We study efficient and consumer-surplus maximizing information poli-
+      cies in a bilateral trade setting where the buyer is initially privately imper-
+      fectly informed about his willingness to pay. We show that providing more
+      information to the buyer can lead to higher market prices without affecting
+      the consumer or producer surplus.
+    </div>
   </details>
-  
+
   <p class="paper">
-    <a>
-      Certifying Lemons with Discernible Hard Information (Email me for a draft)
-    </a>
-    ;
-    <a href="certlemslides.pdf" target="_blank">
-      Slides for an older version
-    </a>
+    <a>Certifying Lemons with Discernible Hard Information (Email me for a draft)</a>;
+    <a href="certlemslides.pdf" target="_blank">Slides for an older version</a>
   </p>
-
   <details class="abstract">
-    <summary>Abstract <span class="meta">Click to expand</span></summary>
+    <summary>Abstract </summary>
     <div>
       A sender with private information (high or low ability) tries to convince a receiver of having higher ability. A certifier offers a menu of (blackwell) experiments and prices to screen the sender. The sender uses the experiment’s outcome to persuade the receiver to take a favorable action. This paper focuses on the equilibrium interaction in this certification game when the receiver can distinguish between outcomes of the experiment based on the hard information contained in the outcome. With binary ability, for a given experiment, the hard information of an outcome is the likelihood ratio of that outcome. The main result characterizes all possible equilibrium outcomes in terms of a convex combination of menus containing only simple experiments. Using this characterization, I show the existence of an equilibrium in which soft information overrules hard information; due to equilibrium self-selection of the sender, some outcomes whose hard information is not sufficient to persuade the receiver end up persuading the receiver.
     </div>
   </details>
-
-  <br>
 </div>
-
 </body>
 </html>
