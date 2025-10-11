@@ -1,105 +1,167 @@
-
 <!DOCTYPE HTML>
 <html>
 
 <head>
-    <title>Hersh</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="style.css" />
-    </style>
-    <style>
-        .container {
-            display: flex;
-            align-items: flex-start; /* Aligns the name and email to the top of the image */
-            justify-content: flex-start;
-        }
+  <title>Hersh</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ====== Base + Layout ====== */
+    :root{
+      --accent: #8B0000;           /* matches your job-market color */
+      --text: #111;
+      --muted: #666;
+      --panel: #faf7f7;
+      --edge: #e7e3e3;
+      --ring: rgba(139,0,0,0.25);
+      --max-ch: 70ch;              /* readable line length */
+    }
 
-        .container img {
-            margin-right: 20px;
-        }
+    .container {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
 
-        .content {
-            text-align: left; /* Aligns everything to the left */
-            margin-left: 20px; /* Adds a bit of padding on the left */
-        }
+    .container img {
+      margin-right: 20px;
+      border-radius: 8px;          /* subtle polish */
+      object-fit: cover;
+    }
 
-        .email {
-            font-size: 0.9em; /* Smaller font size for the email */
-            margin-top: 5px; /* Adds a small margin above the email */
-        }
+    .content {
+      text-align: left;
+      margin-left: 20px;
+      padding-bottom: 40px;
+    }
 
-        .about-me {
-            margin-top: 20px; /* Adds space between the image and the about me section */
-        }
+    .email {
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
 
-        .job-market {
-            margin-top: 8px;
-                color: darkred; /* or use #8B0000 */
-        }
-    </style>
-    <style>
-  /* put with your other styles */
-  details.abstract {
-    margin: 8px 0 20px;
-    max-width: 60ch; /* optional: keeps lines readable */
-  }
-  details.abstract > summary {
-    cursor: pointer;
-    font-weight: 600;
-    text-decoration: underline;
-    list-style: none; /* remove default marker in some browsers */
-  }
-  /* optional: custom caret */
-  details.abstract > summary::marker { content: ""; }
-  details.abstract > summary::before {
-    content: "▸";
-    display: inline-block;
-    width: 1em;
-    transition: transform 0.2s ease;
-  }
-  details.abstract[open] > summary::before { transform: rotate(90deg); }
-  details.abstract > div {
-    margin-top: 8px;
-    line-height: 1.45;
-  }
-</style>
+    .about-me {
+      margin-top: 20px;
+      max-width: var(--max-ch);
+    }
 
+    .job-market {
+      margin-top: 8px;
+      color: darkred; /* or use #8B0000 */
+      font-weight: 700;
+    }
+
+    /* ====== Abstract styling (details/summary) ====== */
+    details.abstract {
+      margin: 12px 0 20px;
+      border: 1px solid var(--edge);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      background: var(--panel);
+      max-width: var(--max-ch);
+      overflow: hidden;
+    }
+
+    details.abstract > summary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+      list-style: none; /* normalize */
+    }
+
+    /* remove default marker & add custom caret */
+    details.abstract > summary::marker { content: ""; }
+    details.abstract > summary::before {
+      content: "▸";
+      display: inline-block;
+      transform-origin: 50% 50%;
+      transition: transform 160ms ease;
+    }
+    details.abstract[open] > summary::before {
+      transform: rotate(90deg);
+    }
+
+    /* focus ring for accessibility */
+    details.abstract > summary:focus {
+      outline: none;
+      box-shadow: 0 0 0 4px var(--ring) inset;
+    }
+
+    details.abstract > div {
+      padding: 12px 14px 14px;
+      border-top: 1px solid var(--edge);
+      line-height: 1.6;
+      color: var(--text);
+      animation: fadeIn 180ms ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-2px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Optional: refine the Abstract label without changing content text */
+    details.abstract > summary span.meta {
+      margin-left: auto;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 0.92em;
+    }
+
+    /* Keep paper blocks tidy */
+    .paper {
+      margin: 14px 0 22px;
+      max-width: var(--max-ch);
+    }
+
+    .paper a {
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+    }
+    .paper a:hover { border-bottom-color: transparent; }
+  </style>
 </head>
 
 <body>
 
 <div class="content">
-    <div class="container">
-        <img src="Chopra.jpg" style="width:270px;height:250px;" alt="Hersh Chopra">
-        <div>
-            <h1 style="margin: 0;">Hersh Chopra</h1>
-            <p class="email">
-                <strong>Email:</strong> 
-                <a href="mailto:hershdeepchopra2026@u.northwestern.edu">hershdeepchopra2026@u.northwestern.edu</a>
-            </p>
-            <p class="resume">
-                <a href="cv.docx" target="_blank"> 
-                    Resume
-                </a>
-            </p>
-        </div>
-    </div>
-
-    <!-- "About Me" Section Below the Image -->
-    <p class="about-me"><strong>About me:</strong> I'm a sixth-year PhD Student at Northwestern University, expected to graduate in June 2026. My research interests involve <strong>Game Theory, Information Economics, and Statistical Decision Theory</strong>. I enjoy reading about Math, Chemistry, Bio Mechanics, Geopolitics, and Philosophy. My hobbies are hiking, cooking, and weightlifting (the sport).</p>
-
-    <!-- Job Market Line -->
-    <p class="job-market"><strong>I am on the job market for the 2025–2026 academic year.</strong></p>
-    <h2>Job Market Papers</h2>
-     <p>
-        <a href="JMP.pdf" target="_blank">
-           Employer Competition and Certification
+  <div class="container">
+    <img src="Chopra.jpg" style="width:270px;height:250px;" alt="Hersh Chopra">
+    <div>
+      <h1 style="margin: 0;">Hersh Chopra</h1>
+      <p class="email">
+        <strong>Email:</strong>
+        <a href="mailto:hershdeepchopra2026@u.northwestern.edu">hershdeepchopra2026@u.northwestern.edu</a>
+      </p>
+      <p class="resume">
+        <a href="cv.docx" target="_blank"> 
+          Resume
         </a>
-    </p>
-         <details class="abstract">
-  <summary>Abstract</summary>
-  <div>
-    This paper develops a theory of employer competition over hiring standards in labor mar-
+      </p>
+    </div>
+  </div>
+
+  <!-- "About Me" Section Below the Image -->
+  <p class="about-me"><strong>About me:</strong> I'm a sixth-year PhD Student at Northwestern University, expected to graduate in June 2026. My research interests involve <strong>Game Theory, Information Economics, and Statistical Decision Theory</strong>. I enjoy reading about Math, Chemistry, Bio Mechanics, Geopolitics, and Philosophy. My hobbies are hiking, cooking, and weightlifting (the sport).</p>
+
+  <!-- Job Market Line -->
+  <p class="job-market"><strong>I am on the job market for the 2025–2026 academic year.</strong></p>
+
+  <h2>Job Market Papers</h2>
+  <p class="paper">
+    <a href="JMP.pdf" target="_blank">
+      Employer Competition and Certification
+    </a>
+  </p>
+
+  <details class="abstract">
+    <summary>Abstract <span class="meta">Click to expand</span></summary>
+    <div>
+      This paper develops a theory of employer competition over hiring standards in labor mar-
 kets where employers rely on third-party certification to screen applicants. The certifier sells
 tests to an applicant, who possesses noisy private information about his ability and seeks to
 persuade employers to offer him employment. An employer hires if conditional on the test
@@ -114,28 +176,32 @@ crease in the probability of unemployment. The certifier’s optimal selling mec
 the exclusion of some applicant types. Second, competition among employers intensifies. The
 inefficient test allocation steers the applicant supply towards less selective employers, resulting
 in equilibrium constriction of standards.
-</details>
-    <br>
-</div>
-    
-    <h2>Working Papers</h2>
-    <p>
-       <a>
-            Certifying Lemons with Discernible Hard Information (Email me for a draft)
-       </a>
-        ; 
-        <a href="certlemslides.pdf" target="_blank">
-            Slides for an older version
-        </a>
-    </p>
-        <details class="abstract">
-  <summary>Abstract</summary>
-  <div>
-    A sender with private information (high or low ability) tries to convince a receiver of having higher ability. A certifier offers a menu of (blackwell) experiments and prices to screen the sender. The sender uses the experiment’s outcome to persuade the receiver to take a favorable action. This paper focuses on the equilibrium interaction in this certification game when the receiver can distinguish between outcomes of the experiment based on the hard information contained in the outcome. With binary ability, for a given experiment, the hard information of an outcome is the likelihood ratio of that outcome. The main result characterizes all possible equilibrium outcomes in terms of a convex combination of menus containing only simple experiments. Using this characterization, I show the existence of an equilibrium in which soft information overrules hard information; due to equilibrium self-selection of the sender, some outcomes whose hard information is not sufficient to persuade the receiver end up persuading the receiver.
-  </div>
-</details>
-    <br>
+    </div>
+  </details>
+
+  <br>
+
+  <h2>Working Papers</h2>
+  <p class="paper">
+    <a>
+      Certifying Lemons with Discernible Hard Information (Email me for a draft)
+    </a>
+    ;
+    <a href="certlemslides.pdf" target="_blank">
+      Slides for an older version
+    </a>
+  </p>
+
+  <details class="abstract">
+    <summary>Abstract <span class="meta">Click to expand</span></summary>
+    <div>
+      A sender with private information (high or low ability) tries to convince a receiver of having higher ability. A certifier offers a menu of (blackwell) experiments and prices to screen the sender. The sender uses the experiment’s outcome to persuade the receiver to take a favorable action. This paper focuses on the equilibrium interaction in this certification game when the receiver can distinguish between outcomes of the experiment based on the hard information contained in the outcome. With binary ability, for a given experiment, the hard information of an outcome is the likelihood ratio of that outcome. The main result characterizes all possible equilibrium outcomes in terms of a convex combination of menus containing only simple experiments. Using this characterization, I show the existence of an equilibrium in which soft information overrules hard information; due to equilibrium self-selection of the sender, some outcomes whose hard information is not sufficient to persuade the receiver end up persuading the receiver.
+    </div>
+  </details>
+
+  <br>
 </div>
 
 </body>
 </html>
+
