@@ -1,50 +1,65 @@
 <!DOCTYPE HTML>
-<html>
-
+<html lang="en">
 <head>
   <title>Hersh</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    :root{
+    :root {
       --accent: #8B0000;
       --text: #111;
       --muted: #666;
       --panel: #fafafa;
       --edge: #e0e0e0;
-      --ring: rgba(139,0,0,0.2);
+      --ring: rgba(139, 0, 0, 0.2);
       --max-ch: 80ch;
     }
-    body { margin: 0; font-family: system-ui, sans-serif; }
 
-    .container {
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
-    }
-
-    .container img {
-      margin-right: 20px;
-      border-radius: 8px;
-      object-fit: cover;
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      color: var(--text);
+      background: white;
     }
 
     .content {
       text-align: left;
       margin: 0 auto;
       max-width: 1100px;
-      padding: 0 28px 48px;
+      padding: 32px 28px 48px;
     }
 
-    .email {
-      font-size: 0.9em;
-      margin-top: 5px;
+    .container {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .container img {
+      width: 270px;
+      height: 250px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .profile-text h1 {
+      margin: 0 0 8px 0;
+    }
+
+    .email,
+    .resume {
+      font-size: 0.95em;
+      margin: 6px 0;
     }
 
     .about-me {
       margin-top: 20px;
       max-width: var(--max-ch);
+      line-height: 1.6;
     }
 
     .job-market {
@@ -53,67 +68,48 @@
       font-weight: 700;
     }
 
-    /* Abstract boxes — more indented and subtle */
-    details.abstract {
-      margin: 8px 0 20px 24px; /* indented */
+    .paper {
+      margin: 14px 0 22px;
+      max-width: var(--max-ch);
+      line-height: 1.5;
+    }
+
+    .paper a {
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .paper a:hover {
+      border-bottom: none;
+    }
+
+    details.abstract,
+    details.statement,
+    details.refs {
+      margin: 8px 0 20px 24px;
       border-left: 2px solid var(--edge);
       background: transparent;
       padding-left: 12px;
       max-width: var(--max-ch);
     }
 
-    details.abstract > summary {
-      cursor: pointer;
-      font-weight: 600;
-      color: var(--muted);
-      list-style: none;
-    }
-
-    details.abstract > summary::marker { content: ""; }
-    details.abstract > summary::before {
-      content: "▸";
-      display: inline-block;
-      width: 1em;
-      color: var(--muted);
-      transition: transform 160ms ease;
-    }
-    details.abstract[open] > summary::before { transform: rotate(90deg); }
-
-    details.abstract > div {
-      margin-top: 6px;
-      padding-left: 16px;
-      line-height: 1.6;
-      color: var(--text);
-      font-size: 0.96em;
-      border-left: 1px dashed var(--edge);
-      /* NEW: justify the text */
-      text-align: justify;
-      text-justify: inter-word;   /* nicer spacing where supported */
-      hyphens: auto;              /* optional: better line breaks */
-      overflow-wrap: anywhere;    /* prevents overflow on long words */
-      /* text-align-last: left;   /* optional: keep the last line non-stretched */
-    }
-
-    .paper { margin: 14px 0 22px; max-width: var(--max-ch); }
-    .paper a { text-decoration: none; border-bottom: none; }
-    .paper a:hover { border-bottom: none; }
-
-    /* References dropdown */
-    details.refs {
-      margin: 10px 0 20px;
-      border-left: 2px solid var(--edge);
-      padding-left: 10px;
-      background: transparent;
-      max-width: var(--max-ch);
-    }
-
+    details.abstract > summary,
+    details.statement > summary,
     details.refs > summary {
       cursor: pointer;
-      color: var(--muted);
       font-weight: 600;
+      color: var(--muted);
       list-style: none;
     }
 
+    details.abstract > summary::marker,
+    details.statement > summary::marker,
+    details.refs > summary::marker {
+      content: "";
+    }
+
+    details.abstract > summary::before,
+    details.statement > summary::before,
     details.refs > summary::before {
       content: "▸";
       display: inline-block;
@@ -121,115 +117,214 @@
       color: var(--muted);
       transition: transform 160ms ease;
     }
-    details.refs[open] > summary::before { transform: rotate(90deg); }
 
-    .refs-body { margin-top: 6px; padding-left: 16px; color: var(--muted); font-size: 0.95em; }
+    details.abstract[open] > summary::before,
+    details.statement[open] > summary::before,
+    details.refs[open] > summary::before {
+      transform: rotate(90deg);
+    }
 
-    .references { list-style: none; padding-left: 0; }
-    .references li { margin: 4px 0; }
-    .references a { text-decoration: none; border-bottom: 1px dotted var(--edge); color: inherit; }
+    details.abstract > div,
+    details.statement > div {
+      margin-top: 8px;
+      padding-left: 16px;
+      line-height: 1.65;
+      color: var(--text);
+      font-size: 0.96em;
+      border-left: 1px dashed var(--edge);
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
+      overflow-wrap: anywhere;
+    }
+
+    .statement-quote {
+      font-weight: 700;
+      font-size: 1.08em;
+      margin: 0 0 14px 0;
+      color: var(--accent);
+    }
+
+    h2 {
+      margin-top: 34px;
+    }
+
+    .references {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .references li {
+      margin: 4px 0;
+    }
+
+    .references a {
+      text-decoration: none;
+      border-bottom: 1px dotted var(--edge);
+      color: inherit;
+    }
+
+    @media (max-width: 700px) {
+      .container img {
+        width: 220px;
+        height: 205px;
+      }
+
+      .content {
+        padding: 24px 18px 40px;
+      }
+    }
   </style>
 </head>
 
 <body>
-<div class="content">
-  <div class="container">
-    <img src="Chopra.jpg" style="width:270px;height:250px;" alt="Hersh Chopra">
-    <div>
-      <h1 style="margin: 0;">Hersh Chopra</h1>
-      <p class="email">
-        <strong>Email:</strong>
-        <a href="mailto:hershdeepchopra2026@u.northwestern.edu">hershdeepchopra2026@u.northwestern.edu</a>
-      </p>
-      <p class="resume">
-        <a href="cv.pdf" target="_blank">Resume</a>
-      </p>
+  <div class="content">
+    <div class="container">
+      <img src="Chopra.jpg" alt="Hersh Chopra" />
+
+      <div class="profile-text">
+        <h1>Hersh Chopra</h1>
+
+        <p class="email">
+          <strong>Email:</strong>
+          <a href="mailto:hershdeepchopra2026@u.northwestern.edu">
+            hershdeepchopra2026@u.northwestern.edu
+          </a>
+        </p>
+
+        <p class="resume">
+          <a href="cv.pdf" target="_blank">Resume</a>
+        </p>
+      </div>
     </div>
+
+    <p class="about-me">
+      <strong>About me:</strong> I'm a sixth-year PhD student at Northwestern University,
+      expected to graduate in June 2026. My research interests involve
+      <strong>Game Theory, Information Economics, Mechanism Design, and Statistical Decision Theory</strong>.
+    </p>
+
+    <p class="about-me">
+      I enjoy reading about Math, Chemistry, Biomechanics, Geopolitics, and Philosophy.
+      My hobbies are hiking, cooking, and weightlifting.
+    </p>
+
+    <details class="statement">
+      <summary>Research Statement</summary>
+      <div>
+        <p class="statement-quote">
+          Every act of creation is a rebellion against the absurd.<br />
+          — Albert Camus
+        </p>
+
+        <p>
+          My broad research interest is in Microeconomic Theory.
+          My research agenda is two-pronged.
+        </p>
+
+        <p>
+          First, I am interested in developing modeling and mathematical tools that allow us
+          to study economically relevant problems. Second, I am keen to use these tools to answer
+          concrete questions about markets, institutions, and decision-making.
+        </p>
+
+        <p>
+          I specialize in studying information as both an incentive device and as a commodity.
+        </p>
+      </div>
+    </details>
+
+    <h2>Working Papers</h2>
+
+    <p class="paper">
+      <a href="icid.pdf" target="_blank">Incentive-Compatible Information Design (joint with Jeffrey C. Ely)</a>,
+      <a href="icidsupp.pdf" target="_blank">Supplementary Appendix</a>
+    </p>
+    <details class="abstract">
+      <summary>Abstract</summary>
+      <div>
+        We study the design of mechanisms by an intermediary that generates information for a sender
+        to persuade a receiver about an unknown attribute of the sender. The sender is initially privately,
+        but imperfectly, informed about her attribute, and the receiver takes an action based on posterior
+        beliefs about the sender’s attribute and the sender’s belief about the attribute. The mechanism
+        generates information for the sender and also controls its disclosure to the receiver. The design
+        of the optimal mechanism needs to screen the privately informed sender and thus confronts
+        incentive-compatibility constraints. The mechanism also deals with obedience constraints, as the
+        intermediary must generate just enough information to persuade the receiver. We characterize
+        incentive-compatible mechanisms for a wide class of problems when the sender contracts with the
+        intermediary. We use this characterization to study profit-maximizing mechanisms in three
+        applications: the design of college-admissions tests, the optimal use of consumer data on a digital
+        market platform, and the optimal design of credit rating schemes.
+      </div>
+    </details>
+
+    <p class="paper">
+      <a href="JMP.pdf" target="_blank">Employer Competition and Certification</a>,
+      <a href="JMPsupp.pdf" target="_blank">Supplementary Appendix</a>
+    </p>
+    <details class="abstract">
+      <summary>Abstract</summary>
+      <div>
+        This paper develops a theory of employer competition over <i>hiring standards</i> in labor markets
+        where employers rely on third-party certification to screen applicants. A revenue-maximizing
+        certifier sells tests to an applicant, who possesses imperfect private information about his ability
+        and seeks to persuade employers to offer him employment. The certifier faces a joint screening
+        and information design problem in designing a test allocation. The distortions from screening
+        reduce the overall informativeness of the test allocation, steering the applicant supply towards
+        less selective employers. This incentivizes the more selective employers to lower their standards,
+        intensifying employer competition.
+      </div>
+    </details>
+
+    <p class="paper">
+      <a href="iid.pdf" target="_blank">Interim Information Design (joint with Jeffrey C. Ely)</a>
+    </p>
+    <details class="abstract">
+      <summary>Abstract</summary>
+      <div>
+        We study efficient and consumer-surplus maximizing information policies in a bilateral trade setting
+        where the buyer is initially privately imperfectly informed about his willingness to pay. We identify
+        a canonical class of demand functions that can be implemented by information disclosures that are
+        targeted based on the buyer’s initial private information. As an application we show that providing
+        more information to the buyer can lead to higher market prices and a lower trade probability without
+        affecting the consumer or producer surplus.
+      </div>
+    </details>
+
+    <p class="paper">
+      <a href="lemons.pdf" target="_blank">Certifying Lemons with Discernible Hard Information</a>
+    </p>
+    <details class="abstract">
+      <summary>Abstract</summary>
+      <div>
+        A sender with private information (high or low ability) tries to convince a receiver of having higher
+        ability. A certifier offers a menu of Blackwell experiments and prices to screen the sender. The sender
+        uses the experiment’s outcome to persuade the receiver to take a favorable action. This paper focuses on
+        the equilibrium interaction in this certification game when the receiver can distinguish between outcomes
+        of the experiment based on the hard information contained in the outcome. With binary ability, for a given
+        experiment, the hard information of an outcome is the likelihood ratio of that outcome. The main result
+        characterizes all possible equilibrium outcomes in terms of a convex combination of menus containing only
+        simple experiments. Using this characterization, I show the existence of an equilibrium in which soft
+        information overrules hard information; due to equilibrium self-selection of the sender, some outcomes
+        whose hard information makes the receiver more pessimistic about the sender's ability end up persuading
+        the receiver to choose the favorable action.
+      </div>
+    </details>
+
+    <h2>Other Writings</h2>
+
+    <p class="paper">
+      <a href="Complementarity_in_Choice_of_Information.pdf" target="_blank">
+        A Note on Complementary and Choice of Information
+      </a>
+    </p>
+    <details class="abstract">
+      <summary>Abstract</summary>
+      <div>
+        In this note, I describe how information can act both as a substitute and a complement when a decision
+        maker anticipates receiving more information in the future.
+      </div>
+    </details>
   </div>
-
-  <p class="about-me"><strong>About me:</strong> I'm a sixth-year PhD Student at Northwestern University, expected to graduate in June 2026. My research interests involve <strong>Game Theory, Information Economics, Mechanism Design and Statistical Decision Theory</strong>.</p>
-
-  <p class="about-me">I enjoy reading about Math, Chemistry, Bio Mechanics, Geopolitics, and Philosophy. My hobbies are hiking, cooking, and weightlifting (the sport).</p>
-
-
-    <summary>
-      <a href="Research Statement.pdf">
-        Research Statement </summary>
-    </a>
-        <li> 
-          <span style="font-weight: bold; font-size: 1.2em;">
-   Every act of creation is a rebellion against the absurd.
-                                                      - Camus, Albert
-</span>
-         
-          My broad research interest is in Microeconomic Theory. 
-My research agenda is two-pronged. 
-First, I am interested in developing modeling and mathematical tools that allow us to study economically relevant problems.
-Second, I am keen to use these tools to answer concrete questions about markets, institutions, and decision-making. 
-I specialize in studying information as both an incentive device and as a commodity. </li>
-      </ul>
-    </div>
-  </details>
-
-
-  <h2>Working Papers</h2>
-  <p class="paper"><a href="icid.pdf" target="_blank">Incentive-Compatible Information Design (joint with Jeffrey C. Ely)</a>, <a href="icidsupp.pdf" target="_blank">Supplementary Appendix</a></p>
-  <details class="abstract">
-    <summary>Abstract</summary>
-    <div>
-      We study the design of mechanisms by an intermediary that generates information for a sender to persuade a receiver about an unknown attribute of the sender. 
-The sender is initially privately, but imperfectly, informed about her attribute, and the receiver takes an action based on posterior beliefs about the sender’s attribute and the sender’s belief about the attribute. 
-The mechanism generates information for the sender and also controls its disclosure to the receiver.
-The design of the optimal mechanism needs to screen the privately informed sender and thus confronts incentive-compatibility constraints.
-The mechanism also deals with obedience constraints, as the intermediary must generate just enough information to persuade the receiver.
- We characterize incentive-compatible mechanisms for a wide class of problems when the sender contracts with the intermediary. 
- We use this characterization to study profit-maximizing mechanisms in three applications: the design of college-admissions tests, the optimal use of consumer data on a digital market
-platform, and the optimal design of credit rating schemes. 
-    </div>
-  </details>
-
-  <p class="paper"><a href="JMP.pdf" target="_blank">Employer Competition and Certification</a>, <a href="JMPsupp.pdf" target="_blank">Supplementary Appendix</a></p>
-
-  <details class="abstract" >
-    <summary>Abstract</summary>
-    <div>
-      This paper develops a theory of employer competition over \textit{hiring standards} in labor markets where employers rely on third-party certification to screen applicants.
-A revenue-maximizing certifier sells tests to an applicant, who possesses imperfect private information about his ability and seeks to persuade employers to offer him employment. 
-The certifier faces a joint screening and information design problem in designing a test allocation.
-The distortions from screening reduce the overall informativeness of the test allocation, steering the applicant supply towards less selective employers.
-This incentivizes the more selective employers to lower their standards, intensifying employer competition.
-    </div>
-  </details>
-
-  <p class="paper"><a href="iid.pdf" target="_blank">Interim Information Design (joint with Jeffrey C. Ely)</a></p>
-  <details class="abstract">
-    <summary>Abstract</summary>
-    <div>
-      We study efficient and consumer-surplus maximizing information policies in a bilateral trade setting where the buyer is initially privately imperfectly informed about his willingness to pay. We identify a canonical class of demand functions that can be implemented by information disclosures that are targeted based on the buyer’s initial private information. As an application we show that providing more information to the buyer can lead to higher market prices and a lower trade probability without affecting the consumer or producer surplus.
-    </div>
-  </details>
-
-  <p class="paper">
-    <a href="lemons.pdf" target="_blank">Certifying Lemons with Discernible Hard Information</a>
-  </p>
-  <details class="abstract">
-    <summary>Abstract</summary>
-    <div>
-      A sender with private information (high or low ability) tries to convince a receiver of having higher ability. A certifier offers a menu of (blackwell) experiments and prices to screen the sender. The sender uses the experiment’s outcome to persuade the receiver to take a favorable action. This paper focuses on the equilibrium interaction in this certification game when the receiver can distinguish between outcomes of the experiment based on the hard information contained in the outcome. With binary ability, for a given experiment, the hard information of an outcome is the likelihood ratio of that outcome. The main result characterizes all possible equilibrium outcomes in terms of a convex combination of menus containing only simple experiments. Using this characterization, I show the existence of an equilibrium in which soft information overrules hard information; due to equilibrium self-selection of the sender, some outcomes whose hard information makes the receiver more pessimistic about the sender's ability end up persuading the receiver to choose the favorable action.
-    </div>
-  </details>
-
-  <h2>Other Writings</h2>
-  <p class="paper">
-    <a href="Complementarity_in_Choice_of_Information.pdf" target="_blank">A Note on Complementary and Choice of Information</a>
-  </p>
-  <details class="abstract">
-    <summary>Abstract</summary>
-    <div>
-      In this note, I describe how information can act both as a substitute and a complement when a decision maker anticipates receiving more information in the future.
-    </div>
-  </details>
-
-</div>
 </body>
 </html>
