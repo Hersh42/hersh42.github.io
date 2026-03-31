@@ -1,133 +1,138 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Hersh</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css" />
+  <title>Hersh Chopra</title>
   <style>
     :root {
-      --accent: #8B0000;
-      --text: #111;
-      --muted: #666;
-      --panel: #fafafa;
-      --edge: #e0e0e0;
-      --ring: rgba(139, 0, 0, 0.2);
-      --max-ch: 80ch;
+      --accent: #8b0000;
+      --text: #111111;
+      --muted: #666666;
+      --edge: #e2e2e2;
+      --bg: #ffffff;
+      --max-width: 1100px;
+      --measure: 80ch;
     }
+
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: system-ui, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text);
-      background: white;
-    }
-
-    .content {
-      text-align: left;
-      margin: 0 auto;
-      max-width: 1100px;
-      padding: 32px 28px 48px;
-    }
-
-    .container {
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .container img {
-      width: 270px;
-      height: 250px;
-      border-radius: 8px;
-      object-fit: cover;
-      flex-shrink: 0;
-      background: #f2f2f2;
-    }
-
-    .profile-text h1 {
-      margin: 0 0 8px 0;
-    }
-
-    .email,
-    .resume {
-      font-size: 0.95em;
-      margin: 6px 0;
-    }
-
-    .about-me {
-      margin-top: 20px;
-      max-width: var(--max-ch);
+      background: var(--bg);
       line-height: 1.6;
     }
 
-    .paper {
-      margin: 14px 0 22px;
-      max-width: var(--max-ch);
-      line-height: 1.5;
-    }
-
-    .paper a {
+    a {
+      color: inherit;
       text-decoration: none;
-      border-bottom: none;
     }
 
-    .paper a:hover {
-      border-bottom: none;
+    a:hover {
+      text-decoration: underline;
+      text-underline-offset: 2px;
     }
 
-    details.abstract {
-      background: transparent;
-      max-width: var(--max-ch);
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 32px 28px 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 270px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .hero-photo {
+      width: 270px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      background: #f3f3f3;
+    }
+
+    .hero-copy {
+      min-width: 0;
+      padding-top: 2px;
+    }
+
+    .hero-copy h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 3vw, 2.5rem);
+      line-height: 1.15;
+    }
+
+    .contact-line {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .resume-link {
+      display: inline-block;
+      margin-top: 2px;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .section-copy,
+    .paper,
+    .statement-section,
+    .abstract {
+      max-width: var(--measure);
+    }
+
+    .section-copy {
+      margin-top: 22px;
+    }
+
+    h2 {
+      margin: 34px 0 14px;
+      font-size: 1.4rem;
+    }
+
+    .paper {
+      margin: 0 0 12px;
     }
 
     .statement-section {
-      max-width: var(--max-ch);
-      margin: 8px 0 20px 0;
+      margin-top: 10px;
     }
 
-    .statement-summary {
-      background: none;
-      border: none;
-      padding: 0;
-      margin: 0;
-      font: inherit;
+    .statement-toggle,
+    details.abstract > summary {
       cursor: pointer;
+      font: inherit;
       font-weight: 600;
       color: var(--muted);
+      background: none;
+      border: 0;
+      padding: 0;
       display: inline-flex;
       align-items: center;
+      gap: 0.25rem;
     }
 
-    .statement-summary::before {
+    .statement-toggle::before,
+    details.abstract > summary::before {
       content: "▸";
-      display: inline-block;
       width: 1em;
-      color: var(--muted);
+      display: inline-block;
       transition: transform 160ms ease;
+      color: var(--muted);
     }
 
-    .statement-section.open .statement-summary::before {
+    .statement-section.open .statement-toggle::before,
+    details.abstract[open] > summary::before {
       transform: rotate(90deg);
     }
 
-    .statement-body {
-      display: none;
-      margin: 8px 0 0 24px;
-      padding-left: 12px;
-      border-left: 2px solid var(--edge);
-    }
-
-    .statement-section.open .statement-body {
-      display: block;
-    }
-
     details.abstract > summary {
-      cursor: pointer;
-      font-weight: 600;
-      color: var(--muted);
       list-style: none;
     }
 
@@ -135,91 +140,92 @@
       content: "";
     }
 
-    details.abstract > summary::before {
-      content: "▸";
-      display: inline-block;
-      width: 1em;
-      color: var(--muted);
-      transition: transform 160ms ease;
+    .statement-quote {
+      margin: 8px 0 0 24px;
+      color: var(--accent);
+      font-size: 1.08rem;
+      font-weight: 700;
     }
 
-    details.abstract[open] > summary::before {
-      transform: rotate(90deg);
+    .statement-body {
+      display: none;
+      margin-top: 10px;
+      margin-left: 24px;
+      padding-left: 16px;
+      border-left: 2px solid var(--edge);
     }
 
-    details.abstract > div,
-    .statement-body > div {
+    .statement-section.open .statement-body {
+      display: block;
+    }
+
+    .statement-body > div,
+    details.abstract > div {
       margin-top: 8px;
       padding-left: 16px;
-      line-height: 1.65;
-      color: var(--text);
-      font-size: 0.96em;
       border-left: 1px dashed var(--edge);
+      font-size: 0.97rem;
       text-align: justify;
       text-justify: inter-word;
       hyphens: auto;
       overflow-wrap: anywhere;
     }
 
-    .statement-quote {
-      font-weight: 700;
-      font-size: 1.08em;
-      margin: 6px 0 0 24px;
-      color: var(--accent);
-      max-width: var(--max-ch);
-    }
-
-    h2 {
-      margin-top: 34px;
-    }
-
-    @media (max-width: 700px) {
-      .container img {
-        width: 220px;
-        height: 205px;
+    @media (max-width: 720px) {
+      .page {
+        padding: 24px 18px 40px;
       }
 
-      .content {
-        padding: 24px 18px 40px;
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .hero-photo {
+        width: min(270px, 100%);
+        height: auto;
+        aspect-ratio: 270 / 250;
+      }
+
+      .statement-quote,
+      .statement-body {
+        margin-left: 0;
       }
     }
   </style>
 </head>
-
 <body>
-  <div class="content">
-    <div class="container">
-      <img src="Chopra.jpg" alt="Hersh Chopra" />
+  <main class="page">
+    <section class="hero">
+      <img class="hero-photo" src="Chopra.jpg" alt="Hersh Chopra" />
 
-      <div class="profile-text">
+      <div class="hero-copy">
         <h1>Hersh Chopra</h1>
 
-        <p class="email">
+        <p class="contact-line">
           <strong>Email:</strong>
-          <a href="mailto:hershdeepchopra2026@u.northwestern.edu">
-            hershdeepchopra2026@u.northwestern.edu
-          </a>
+          <a href="mailto:hershdeepchopra2026@u.northwestern.edu">hershdeepchopra2026@u.northwestern.edu</a>
         </p>
 
-        <p class="resume">
-          <a href="cv.pdf" target="_blank">Resume</a>
+        <p class="contact-line">
+          <a class="resume-link" href="cv.pdf" target="_blank" rel="noreferrer">Resume</a>
         </p>
       </div>
-    </div>
+    </section>
 
-    <p class="about-me">
+    <p class="section-copy">
       <strong>About me:</strong> I'm a sixth-year PhD student at Northwestern University,
       expected to graduate in June 2026. My research interests involve
       <strong>Game Theory, Information Economics, Mechanism Design, and Statistical Decision Theory</strong>.
     </p>
 
-    <p class="about-me">
+    <p class="section-copy">
       I enjoy reading about Math, Chemistry, Biomechanics, Geopolitics, and Philosophy.
       My hobbies are hiking, cooking, and weightlifting.
     </p>
 
-    <div class="statement-section" id="research-statement">
-      <button class="statement-summary" type="button" aria-expanded="false" aria-controls="statement-body">
+    <section class="statement-section" id="research-statement">
+      <button class="statement-toggle" type="button" aria-expanded="false" aria-controls="statement-body">
         Research Statement
       </button>
 
@@ -231,11 +237,10 @@
       <div class="statement-body" id="statement-body">
         <div>
           <p>
-            My broad research interest is in Microeconomic Theory.
-            My research agenda is two-pronged.
-            First, I am interested in developing modeling and mathematical tools that allow us
-            to study economically relevant problems. Second, I am keen to use these tools to answer
-            concrete questions about markets, institutions, and decision-making.
+            My broad research interest is in Microeconomic Theory. My research agenda is two-pronged.
+            First, I am interested in developing modeling and mathematical tools that allow us to study
+            economically relevant problems. Second, I am keen to use these tools to answer concrete
+            questions about markets, institutions, and decision-making.
           </p>
 
           <p>
@@ -243,13 +248,13 @@
           </p>
         </div>
       </div>
-    </div>
+    </section>
 
     <h2>Working Papers</h2>
 
     <p class="paper">
-      <a href="icid.pdf" target="_blank">Incentive-Compatible Information Design (joint with Jeffrey C. Ely)</a>,
-      <a href="icidsupp.pdf" target="_blank">Supplementary Appendix</a>
+      <a href="icid.pdf" target="_blank" rel="noreferrer">Incentive-Compatible Information Design (joint with Jeffrey C. Ely)</a>,
+      <a href="icidsupp.pdf" target="_blank" rel="noreferrer">Supplementary Appendix</a>
     </p>
     <details class="abstract">
       <summary>Abstract</summary>
@@ -270,8 +275,8 @@
     </details>
 
     <p class="paper">
-      <a href="JMP.pdf" target="_blank">Employer Competition and Certification</a>,
-      <a href="JMPsupp.pdf" target="_blank">Supplementary Appendix</a>
+      <a href="JMP.pdf" target="_blank" rel="noreferrer">Employer Competition and Certification</a>,
+      <a href="JMPsupp.pdf" target="_blank" rel="noreferrer">Supplementary Appendix</a>
     </p>
     <details class="abstract">
       <summary>Abstract</summary>
@@ -288,7 +293,7 @@
     </details>
 
     <p class="paper">
-      <a href="iid.pdf" target="_blank">Interim Information Design (joint with Jeffrey C. Ely)</a>
+      <a href="iid.pdf" target="_blank" rel="noreferrer">Interim Information Design (joint with Jeffrey C. Ely)</a>
     </p>
     <details class="abstract">
       <summary>Abstract</summary>
@@ -303,7 +308,7 @@
     </details>
 
     <p class="paper">
-      <a href="lemons.pdf" target="_blank">Certifying Lemons with Discernible Hard Information</a>
+      <a href="lemons.pdf" target="_blank" rel="noreferrer">Certifying Lemons with Discernible Hard Information</a>
     </p>
     <details class="abstract">
       <summary>Abstract</summary>
@@ -325,7 +330,7 @@
     <h2>Other Writings</h2>
 
     <p class="paper">
-      <a href="Complementarity_in_Choice_of_Information.pdf" target="_blank">
+      <a href="Complementarity_in_Choice_of_Information.pdf" target="_blank" rel="noreferrer">
         A Note on Complementary and Choice of Information
       </a>
     </p>
@@ -336,15 +341,16 @@
         maker anticipates receiving more information in the future.
       </div>
     </details>
-  </div>
-  <script>
-    const statementSection = document.getElementById('research-statement');
-    const statementButton = statementSection?.querySelector('.statement-summary');
+  </main>
 
-    if (statementSection && statementButton) {
-      statementButton.addEventListener('click', () => {
-        const isOpen = statementSection.classList.toggle('open');
-        statementButton.setAttribute('aria-expanded', String(isOpen));
+  <script>
+    const section = document.getElementById('research-statement');
+    const button = section?.querySelector('.statement-toggle');
+
+    if (section && button) {
+      button.addEventListener('click', () => {
+        const open = section.classList.toggle('open');
+        button.setAttribute('aria-expanded', String(open));
       });
     }
   </script>
